@@ -1,0 +1,9 @@
+﻿Prefix **--->** * **<---** Just wonderful.
+( ) - **needed** argument
+[ ] - ***optional*** argument
+
+__Commands:__
+    ** sb_help ** - Brings up some help. You are reading it just in this moment. Wow.
+    ** sb_ping ** - Replies the ping of the bot at the moment.
+    ** sb_stick (mention) ** - Sticks the mentioned user to the channel he is in.
+    ** sb_unstick (mention) ** - Unsticks the mentioned user.
