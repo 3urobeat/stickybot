@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const os = require("os");
 const superagent = require("superagent");
 var fs = require("fs");
+const token = require('./token.json')
 
 const PREFIX = "sb_";
 
@@ -68,4 +69,4 @@ bot.on("message", async function(message) {
     }
 });
 
-bot.login(process.env.TOKEN)
+bot.login(token.token)
