@@ -1,4 +1,4 @@
-﻿Prefix **--->** * **<---** Just wonderful.
+Prefix **--->** * **<---** Just wonderful.
 ( ) - **needed** argument
 [ ] - ***optional*** argument
 

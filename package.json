@@ -1,0 +1,19 @@
+{
+  "name": "stickychannelbot",
+  "version": "1.0.0",
+  "description": "Makes sticky channels for Discord.",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "fs": "^0.0.1-security",
+    "opusscript": "^0.0.4",
+    "superagent": "^3.8.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "3urobeat",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
