@@ -1,3 +1,5 @@
+<strong>This project is not finished and currently not working!</strong>
+
 <div align="center">
 	<h1 align="center">~ stickybot ~</h1>
 	<strong>If someone wants to leave that sticky channel the bot will move him right back in. </strong><br />See how to set the bot up below.<br /><br />
