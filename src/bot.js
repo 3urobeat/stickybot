@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 22:07:11
  * Author: 3urobeat
  * 
- * Last Modified: 15.02.2022 23:08:10
+ * Last Modified: 15.02.2022 23:21:26
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -15,8 +15,11 @@
  */
 
 
+//Invite link: https://discord.com/api/oauth2/authorize?client_id=943255143615459338&permissions=16777216&scope=applications.commands%20bot
+
 const Discord = require("discord.js");
 const logger  = require("output-logger");
+const nedb    = require("@yetzt/nedb");
 
 var config = require("../config.json");
 var commandsFile = require("./commands.js");
@@ -55,7 +58,27 @@ module.exports.run = () => {
         //Let the bot appear online
         bot.user.setPresence({ activities: [{ name: "Making people stick", type: "PLAYING" }], status: "online" });
 
-        commandsFile.registerSlashCommands(bot);        
+        //Register out slash commands
+        commandsFile.registerSlashCommands(bot);
+
+        //Load the two databases
+        const stickychannels = new nedb("./data/stickychannels.db");
+        const stickyusers    = new nedb("./data/stickyusers.db");
+
+        stickychannels.loadDatabase((err) => {
+            if (err) return logger("error", "Error loading stickychannels database. Error: " + err)
+            logger("info", "Successfully loaded stickychannels database.") //load db content into memory
+        })
+
+        stickyusers.loadDatabase((err) => {
+            if (err) return logger("error", "Error loading stickyusers database. Error: " + err)
+            logger("info", "Successfully loaded stickyusers database.") //load db content into memory
+        })
+
+        bot.dbs = { //add both dbs to bot object to make them easier accessible
+            stickychannels,
+            stickyusers
+        }
     });
 
 
