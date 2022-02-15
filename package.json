@@ -1,15 +1,23 @@
 {
-  "name": "stickychannelbot",
+  "name": "stickybot",
   "version": "1.0.0",
-  "description": "Makes sticky channels for Discord.",
+  "description": "A simple bot that let's you make sticky channels like Teamspeak in Discord.",
   "main": "index.js",
-  "dependencies": {
-    "discord.js": "^11.4.2",
-    "fs": "^0.0.1-security",
-    "opusscript": "^0.0.4",
-  },
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "3urobeat"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HerrEurobeat/stickybot.git"
+  },
+  "author": "3urobeat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HerrEurobeat/stickybot/issues"
+  },
+  "homepage": "https://github.com/HerrEurobeat/stickybot#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "output-logger": "^2.0.0"
+  }
 }
