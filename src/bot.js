@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 22:07:11
  * Author: 3urobeat
  * 
- * Last Modified: 15.02.2022 22:31:16
+ * Last Modified: 15.02.2022 23:08:10
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -19,6 +19,7 @@ const Discord = require("discord.js");
 const logger  = require("output-logger");
 
 var config = require("../config.json");
+var commandsFile = require("./commands.js");
 
 const version = "1.0";
 
@@ -53,6 +54,8 @@ module.exports.run = () => {
 
         //Let the bot appear online
         bot.user.setPresence({ activities: [{ name: "Making people stick", type: "PLAYING" }], status: "online" });
+
+        commandsFile.registerSlashCommands(bot);        
     });
 
 
@@ -62,6 +65,13 @@ module.exports.run = () => {
     });
 
 
+    //Listen for interactions and let the interactionCreate function handle them
+    bot.on("interactionCreate", (interaction) => {
+        require("./commands.js").interactionCreate(bot, logger, interaction);
+    })
+
+
+    //Login
     logger("", "", true);
     logger("info", "Logging in...")
     bot.login(config.token);
