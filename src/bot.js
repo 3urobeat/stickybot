@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 22:07:11
  * Author: 3urobeat
  * 
- * Last Modified: 15.02.2022 23:21:26
+ * Last Modified: 17.02.2022 12:05:41
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -42,6 +42,7 @@ module.exports.run = () => {
 
     const bot = new Discord.Client({
         intents: [
+            Discord.Intents.FLAGS.GUILDS,
             Discord.Intents.FLAGS.GUILD_VOICE_STATES
         ]
     });
