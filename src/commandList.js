@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 23:00:08
  * Author: 3urobeat
  * 
- * Last Modified: 15.02.2022 23:03:51
+ * Last Modified: 17.02.2022 12:30:40
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -39,7 +39,7 @@ module.exports.commandList = [
     },
     {
         name: "stickchannel",
-        description: "Prevents any user joining this channel from leaving",
+        description: "Prevents any user joining this channel from leaving (honeypot)",
         options: [
             {
                 name: "channel",
@@ -63,7 +63,7 @@ module.exports.commandList = [
     },
     {
         name: "unstickchannel",
-        description: "Unsticks a channel",
+        description: "Unsticks a channel (and every user who was stickied to it)",
         options: [
             {
                 name: "channel",

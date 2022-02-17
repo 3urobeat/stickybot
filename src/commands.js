@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 22:41:55
  * Author: 3urobeat
  * 
- * Last Modified: 16.02.2022 16:17:47
+ * Last Modified: 17.02.2022 12:34:19
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -56,31 +56,36 @@ module.exports.interactionCreate = (bot, logger, interaction) => {
     //Run code for requested command
     switch (interaction.commandName) {
         case "stickuser":
-            bot.dbs.stickyusers.update({ $and: [{ userid: userid }, { channelid: channelid }] }, { $set: { userid: userid, channelid: channelid } }, { upsert: true }, (err) => {
+            bot.dbs.stickyusers.update({ $and: [{ userid: userid }, { channelid: channelid }] }, { $set: { userid: userid, channelid: channelid, guildid: interaction.guild.id } }, { upsert: true }, (err) => {
                 if (err) logger("error", "Error updating stickyusers database! Error: " + err);
             
                 interaction.reply(`User ${userid} is now stuck in ${channelid}.`);
             })
             break;
         case "stickchannel":
-            bot.dbs.stickychannels.update({ channelid: channelid }, { $set: { channelid: channelid } }, { upsert: true }, (err) => {
+            bot.dbs.stickychannels.update({ channelid: channelid }, { $set: { channelid: channelid, guildid: interaction.guild.id } }, { upsert: true }, (err) => {
                 if (err) logger("error", "Error updating stickychannels database! Error: " + err);
             
                 interaction.reply(`Everyone joining ${channelid} will now be stuck to it.`);
             })
             break;
         case "unstickuser":
-            bot.dbs.stickyusers.remove({ userid: userid }, {}, (err) => {
+            bot.dbs.stickyusers.remove({ $and: [{ userid: userid, guildid: interaction.guild.id }] }, {}, (err) => {
                 if (err) logger("error", "Error updating stickyusers database! Error: " + err);
             
                 interaction.reply(`Unstuck user ${userid}.`);
             })
             break;
         case "unstickchannel":
-            bot.dbs.stickychannels.remove({ channelid: channelid }, {}, (err) => {
+            bot.dbs.stickychannels.remove({ $and: [{ channelid: channelid, guildid: interaction.guild.id }] }, {}, (err) => {
                 if (err) logger("error", "Error updating stickychannels database! Error: " + err);
             
                 interaction.reply(`Channel ${channelid} is not sticky anymore.`);
+            })
+
+            //Remove any users who was stickied to this channel from stickyusers db
+            bot.dbs.stickyusers.remove({ $and: [{ channelid: channelid, guildid: interaction.guild.id }] }, {}, (err) => {
+                if (err) logger("error", "Error updating stickyusers database! Error: " + err);
             })
             break;
         default:
