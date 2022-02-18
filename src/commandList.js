@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 23:00:08
  * Author: 3urobeat
  * 
- * Last Modified: 17.02.2022 12:30:40
+ * Last Modified: 18.02.2022 13:49:06
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -72,5 +72,10 @@ module.exports.commandList = [
                 type: Discord.Constants.ApplicationCommandOptionTypes.CHANNEL
             }
         ]
+    },
+    {
+        name: "stickylist",
+        description: "Lists all users that are sticky",
+        options: []
     }
 ]

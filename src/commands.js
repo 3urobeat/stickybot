@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 22:41:55
  * Author: 3urobeat
  * 
- * Last Modified: 17.02.2022 12:34:19
+ * Last Modified: 18.02.2022 14:16:51
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -87,6 +87,62 @@ module.exports.interactionCreate = (bot, logger, interaction) => {
             bot.dbs.stickyusers.remove({ $and: [{ channelid: channelid, guildid: interaction.guild.id }] }, {}, (err) => {
                 if (err) logger("error", "Error updating stickyusers database! Error: " + err);
             })
+            break;
+        case "stickylist":
+            let str = "";
+            let rdy = 0; //async JS sometimes makes stuff more complicated than it should be: Track if both checks are done before sending message
+
+            //Collect users
+            bot.dbs.stickyusers.find({ guildid: interaction.guild.id }, (err, docs) => {
+                if (err) {
+                    logger("err", `Error finding all users that are sticky in guild ${interaction.guild.id}! Error: ${err}`)
+                    interaction.reply("An error occurred! Please check the terminal for errors.");
+                    return;
+                }
+
+                if (docs.length == 0) return rdy++;
+
+                str += "Users:\n"
+
+                docs.forEach((e, i) => {
+                    str += `- User \`${interaction.guild.members.cache.get(e.userid).user.username}\` is stuck in channel \`${interaction.guild.channels.cache.get(e.channelid).name}\`\n`
+
+                    if (i + 1 == docs.length) { //Check if ready
+                        str += "\n"
+                        rdy++;
+                    }
+                })
+            })
+
+            //Collect channels
+            bot.dbs.stickychannels.find({ guildid: interaction.guild.id }, (err, docs) => {
+                if (err) {
+                    logger("err", `Error finding all users that are sticky in guild ${interaction.guild.id}! Error: ${err}`)
+                    interaction.reply("An error occurred! Please check the terminal for errors.");
+                    return;
+                }
+
+                if (docs.length == 0) return rdy++;
+
+                str += "Channels:\n"
+
+                docs.forEach((e, i) => {
+                    str += `- Channel \`${interaction.guild.channels.cache.get(e.channelid).name}\` is sticky`
+
+                    if (i + 1 == docs.length) rdy++; //Check if ready
+                })
+            })
+
+            //Send message
+            var readyCheckInterval = setInterval(() => {
+                if (rdy == 2) {
+                    clearInterval(readyCheckInterval);
+
+                    if (str == "") return interaction.reply("It looks like no user and no channel is sticky in this guild.");
+                        else interaction.reply(str);
+                }
+            }, 250);
+
             break;
         default:
             logger("warn", "Invalid commandName in interactionCreate recieved! Recieved name: " + interaction.commandName); //This can't happen. For real. Trust me.
