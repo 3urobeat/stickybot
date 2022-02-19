@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 22:41:55
  * Author: 3urobeat
  * 
- * Last Modified: 19.02.2022 13:32:17
+ * Last Modified: 19.02.2022 13:46:51
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -25,9 +25,11 @@ const { commandList } = require("./commandList.js");
  */
 module.exports.registerSlashCommands = (bot) => {
     commandList.forEach((e) => {
-        //bot.application.commands.create(e);                            //Release
-        bot.guilds.cache.get("232550371191554051").commands.create(e);   //Testing
+        bot.application.commands.create(e);                              //Release
+        //bot.guilds.cache.get("232550371191554051").commands.create(e); //Testing
     })
+
+    //bot.guilds.cache.get("232550371191554051").commands.set([]); //Delete all created commands
 }
 
 

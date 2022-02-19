@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 22:07:11
  * Author: 3urobeat
  * 
- * Last Modified: 17.02.2022 12:05:41
+ * Last Modified: 19.02.2022 13:46:30
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -73,7 +73,7 @@ module.exports.run = () => {
 
         stickyusers.loadDatabase((err) => {
             if (err) return logger("error", "Error loading stickyusers database. Error: " + err)
-            logger("info", "Successfully loaded stickyusers database.") //load db content into memory
+            logger("info", "Successfully loaded stickyusers database.\n") //load db content into memory
         })
 
         bot.dbs = { //add both dbs to bot object to make them easier accessible

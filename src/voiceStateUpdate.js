@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 22:07:53
  * Author: 3urobeat
  * 
- * Last Modified: 17.02.2022 12:47:36
+ * Last Modified: 19.02.2022 13:46:01
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -27,11 +27,11 @@ const Discord = require("discord.js");
 module.exports.run = (bot, logger, oldState, newState) => {
     if (!oldState || !newState) return; //Make sure one of the two states can't be undefined/null
 
-    if (!newState.channelId) logger("debug", oldState.id + " gave up and left the voice channel.")
+    //if (!newState.channelId) logger("debug", oldState.id + " gave up and left the voice channel.")
 
     //Don't bother if user just left
     if (newState.channelId && oldState.channelId != newState.channelId) {
-        logger("debug", oldState.id + " switched channel to " + newState.channelId);
+        //logger("debug", oldState.id + " switched channel to " + newState.channelId);
 
         bot.dbs.stickyusers.findOne({ $and: [{ userid: newState.member.id, guildid: newState.guild.id }] }, (err, doc) => {
             if (err) logger("err", "Error searching for user in stickyusers db! Error: " + err);
