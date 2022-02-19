@@ -105,10 +105,7 @@ module.exports.interactionCreate = (bot, logger, interaction) => {
                 str += "Users:\n"
 
                 docs.forEach((e, i) => {
-                    let thisuser    = interaction.guild.members.cache.get(e.userid);
-                    let thischannel = interaction.guild.channels.cache.get(e.channelid);
-
-                    if (thisuser && thischannel) str += `- User \`${thisuser.user.username}\` is stuck in channel \`${thischannel.name}\`\n`
+                    str += `- User <@${e.userid}> is stuck in channel <#${e.channelid}>\n`
 
                     if (i + 1 == docs.length) { //Check if ready
                         str += "\n"
@@ -129,10 +126,8 @@ module.exports.interactionCreate = (bot, logger, interaction) => {
 
                 str += "Channels:\n"
 
-                docs.forEach((e, i) => {
-                    let thischannel = interaction.guild.channels.cache.get(e.channelid);
-                    
-                    if (thischannel) str += `- Channel \`${thischannel.name}\` is sticky`
+                docs.forEach((e, i) => {                    
+                    str += `- Channel <#${e.channelid}> is sticky`
 
                     if (i + 1 == docs.length) rdy++; //Check if ready
                 })
@@ -144,7 +139,7 @@ module.exports.interactionCreate = (bot, logger, interaction) => {
                     clearInterval(readyCheckInterval);
 
                     if (str == "") return interaction.reply("It looks like no user and no channel is sticky in this guild.");
-                        else interaction.reply(str);
+                        else interaction.reply({ content: str, allowedMentions: { users: [] } });
                 }
             }, 250);
 
