@@ -4,7 +4,7 @@
  * Created Date: 15.02.2022 22:41:55
  * Author: 3urobeat
  * 
- * Last Modified: 18.02.2022 14:16:51
+ * Last Modified: 19.02.2022 13:32:17
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -105,7 +105,10 @@ module.exports.interactionCreate = (bot, logger, interaction) => {
                 str += "Users:\n"
 
                 docs.forEach((e, i) => {
-                    str += `- User \`${interaction.guild.members.cache.get(e.userid).user.username}\` is stuck in channel \`${interaction.guild.channels.cache.get(e.channelid).name}\`\n`
+                    let thisuser    = interaction.guild.members.cache.get(e.userid);
+                    let thischannel = interaction.guild.channels.cache.get(e.channelid);
+
+                    if (thisuser && thischannel) str += `- User \`${thisuser.user.username}\` is stuck in channel \`${thischannel.name}\`\n`
 
                     if (i + 1 == docs.length) { //Check if ready
                         str += "\n"
@@ -127,7 +130,9 @@ module.exports.interactionCreate = (bot, logger, interaction) => {
                 str += "Channels:\n"
 
                 docs.forEach((e, i) => {
-                    str += `- Channel \`${interaction.guild.channels.cache.get(e.channelid).name}\` is sticky`
+                    let thischannel = interaction.guild.channels.cache.get(e.channelid);
+                    
+                    if (thischannel) str += `- Channel \`${thischannel.name}\` is sticky`
 
                     if (i + 1 == docs.length) rdy++; //Check if ready
                 })
