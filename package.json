@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HerrEurobeat/stickybot.git"
+    "url": "git+https://github.com/3urobeat/stickybot.git"
   },
   "author": "3urobeat",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HerrEurobeat/stickybot/issues"
+    "url": "https://github.com/3urobeat/stickybot/issues"
   },
-  "homepage": "https://github.com/HerrEurobeat/stickybot#readme",
+  "homepage": "https://github.com/3urobeat/stickybot#readme",
   "dependencies": {
     "@yetzt/nedb": "^1.8.0",
     "discord.js": "^13.6.0",

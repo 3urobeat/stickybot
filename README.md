@@ -8,7 +8,7 @@
 &nbsp;  
 
 ## **Download:**
-Click here: [Download](https://github.com/HerrEurobeat/stickybot/archive/master.zip)  
+Click here: [Download](https://github.com/3urobeat/stickybot/archive/master.zip)  
 Extract the zip and open the `stickybot` folder.  
   
 You need to have at least node.js version 14.15.0 installed: [Download](https://nodejs.org)  
